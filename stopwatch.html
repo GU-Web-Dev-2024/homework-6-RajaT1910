@@ -29,19 +29,51 @@
 
             var interval;
 
+            let $wrapper = $("#wrapper");
+
+            // Centering everything
+            $(".wrapper").css({
+                "margin": "auto",
+                "text-align": "center"
+            })
+
+
             // timer background
             $("#timer").addClass("timer-background");
-            $("#timer").css("background-color", "grey");
+            $(".timer-background").css("background-color", "grey");
+            $(".timer-background").css("background-color", "grey");
+
+
+            // button classes
+            $buttonStart.addClass("btn");
+            $buttonStop.addClass("btn");
+            $buttonReset.addClass("btn");
+
+            // Styling buttons 
+            $(".btn").css({
+                "background-color": "#4CAF50",  
+                "border": "none",                
+                "color": "white",                
+                "padding": "15px 32px",         
+                "text-align": "center",        
+                "display": "inline-block",       
+                "font-size": "16px",             
+                "margin": "",           
+                "cursor": "pointer",            
+                "border-radius": "4px",
+            });
 
             $buttonStart.on("click", function () {
                 clearInterval(interval);
                 interval = setInterval(startTimer, 10);
-                $("#timer").css("background-color", "#dff0d8"); 
+                $(".timer-background").css("background-color", "#dff0d8");
+
             });
 
             $buttonStop.on("click", function () {
                 clearInterval(interval);
-                $("#timer").css("background-color", "lightcoral"); // light red
+                $(".timer-background").css("background-color", "lightcoral"); // light red
+
             });
 
             $buttonReset.on("click", function () {
@@ -50,7 +82,7 @@
                 seconds = "00";
                 $appendTens.text(tens);
                 $appendSeconds.text(seconds);
-                $("#timer").css("background-color", "grey"); // reverting to grey
+      
             });
 
             function startTimer() {
