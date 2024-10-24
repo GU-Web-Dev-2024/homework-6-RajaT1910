@@ -28,6 +28,7 @@
             let $buttonReset = $("#button-reset");
 
             var interval;
+            var opacityInterval;
 
             let $wrapper = $("#wrapper");
 
@@ -37,6 +38,13 @@
                 "text-align": "center"
             })
 
+            // function to set opacity
+            function startOpacityAnimation() {
+                opacityInterval = setInterval(function () {
+                    $(".timer-background").animate({ opacity: 0.8 }, 500)
+                        .animate({ opacity: 1.0 }, 500);
+                }, 1000); 
+            }
 
             // timer background
             $("#timer").addClass("timer-background");
@@ -66,23 +74,27 @@
             $buttonStart.on("click", function () {
                 clearInterval(interval);
                 interval = setInterval(startTimer, 10);
-                $(".timer-background").css("background-color", "#dff0d8");
-
+                $(".timer-background").css("background-color", "green");
+                startOpacityAnimation(); 
             });
 
             $buttonStop.on("click", function () {
                 clearInterval(interval);
                 $(".timer-background").css("background-color", "lightcoral"); // light red
-
+                clearInterval(opacityInterval); // Stop the opacity animation
+                $(".timer-background").css("opacity", "1.0"); // Reset opacity
             });
 
             $buttonReset.on("click", function () {
                 clearInterval(interval);
+                clearInterval(opacityInterval);
                 tens = "00";
                 seconds = "00";
                 $appendTens.text(tens);
                 $appendSeconds.text(seconds);
-      
+                $(".timer-background").css({"opacity": "1.0"
+                    ,"background-color": "grey"
+                }); // reverting to grey and reseting opacity
             });
 
             function startTimer() {
